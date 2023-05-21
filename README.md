@@ -1,2 +1,5 @@
 # My-Swagger
-My Swagger Hub Work
+This repo contains my Swagger work.
+
+##GoREST API Documentation##
+GoREST API Documentation in Swagger Hub

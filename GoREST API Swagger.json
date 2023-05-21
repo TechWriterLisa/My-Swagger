@@ -1,0 +1,477 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "GoREST API Documentation",
+    "description": "## Introduction\n The **GoREST** API provides a free sandbox environment for performing REST API and GraphQL testing for prototyping. Registerd users provide fake user data, but the responses are real.\n ## Who is the GoREST API for?\n The audience for the [GoREST API]([http://gorest.co.in) is developers who need an easy way to test REST API and GraphQL endpoints.\n ## Authorization (Authentication)\n Users are required to create an account.\n A Token Bearer is not required to `GET` all general user information, but all other specific requests require a Token Bearer.\n ## Base URL\n [GoREST API]([http://gorest.co.in)\n ## Support\n If you encounter any errors while using the API, please use the Help button at the top of the main screen to read our knowledge base. If your question has not been answered, feel free to post a new question. We’ll do our best to resolve the issue as soon as possible. Please keep in mind that we are located in the India Standard Time Zone (IST).\n If you would like to contact us for any other reason, please use our contact form on the bottom of the main page. [http://gorest.co.in](www.gorest.co.in)\n ## Users Endpoint\n The **GoREST API** provides user profiles with user id, name, email, gender and status. You can perform CRUD operations on all users.\n\n\nhttp://gorest.co.in/public/v2/users\n\nThe following request are allowed for the Users Endpoint:\n\n**`GET`, `POST`, `PUT`, `PATCH`, `DELETE`**\n\n| **Parameter Name** | **Data Type** | **Description** |\n | --- | --- | --- |\n | id | integer | Required. The id is generated automatically when a user is created. The id is required for `PUT` and `DELETE` methods.  <br>**Note:** You must use id for the `GET` method when requesting the user details with specific user id. |\n | name | string | Required. Used for creating a new user. The name is required for `POST`, `PUT` and `PATCH`. |\n | email | string | Required. The email is used for creating a new user. The email is required for `POST`, `PUT` and `PATCH`. |\n | status | string | Required. The status is used for creating a new user. The status is required for `POST`, `PUT` and `PATCH`. Available options include: active or inactive. |\n | gender | string | Required. The gender is used for creating a new user. The gender is required for `POST`. The available genders include: male or female. |\n\n\n## Posts Endpoint\n The **GoREST API** provides posts with post id, user_id, title and body. You can perform CRUD operations on all posts.\n\nhttp://gorest.co.in/public/v2/posts\n\nThe following request are allowed for the Posts Endpoint:\n\n**`GET`, `POST`, `PUT`, `PATCH`, `DELETE`**\n\n| **Parameter Name** | **Data Type** | **Description** |\n | --- | --- | --- |\n | id | integer | Required. The id is generated automatically when a message is created. The id is required for `PUT`, `PATCH` and `DELETE` methods.  <br>**Note:** You must use id for the `GET` method when requesting post details with specific id. |\n | user_id | integer | Required. The user_id is required for `POST`, `PUT`, `PATCH` and `DELETE` . |\n | title | string | Required. The title is required for `POST`, `PUT`, `PATCH` and `DELETE`. |\n | body | string | Required. The body is required for `POST`, `PUT`, `PATCH` and `DELETE`. |\n\n## HTTP and Error Codes\n\nThe **GoRest API** returns HTTP status and error code messages.\n\n| **HTTP Code** | **Message** | **Description** |\n | --- | --- | --- |\n | 200 | OK | The request was successful. |\n | 201 | OK | A resource was successfully created in response to a `POST` request. The Location header contains the URL pointing to the newly created resource. |\n | 204 | OK | The request was handled successfully and the response contains no body content (like a `DELETE` request). |\n | 304 | OK | The resource was not modified. You can use the cached version. |\n | 400 | Bad Request | The request was invalid or missing a required parameter. |\n | 401 | Not Found | Authentication failed. |\n | 403 | Not Found | The authenticated user is not allowed to access the specified API endpoint. |\n | 404 | Not Found | The requested resource was not found. |\n | 405 | Not Found | Method not allowed. Please check the Allow header for the allowed HTTP methods. |\n | 415 | Not Found | Unsupported media type. The requested content type or version number is invalid. |\n | 422 | Not Found | Data validation failed (in response to a `POST` request, for example). Please check the response body for detailed error messages. |\n | 429 | Not Found | Too many requests. The request was rejected due to rate limiting. |\n | 500 | Internal Server Error | An error occurred on the server. |\n",
+    "termsOfService": "https://gorest.co.in/privacy-policy",
+    "contact": {
+      "email": "ldadams42@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.11"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/B24979/APIDocumention/1.0.0",
+      "description": "Find out more about the SwaggerHub virtual server."
+    },
+    {
+      "url": "https://gorest.co.in/public/v2",
+      "description": "Find out more about the GoRest API."
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Users",
+      "description": "This collection has all the CRUD operations to create, edit, list and delete the users."
+    },
+    {
+      "name": "Posts",
+      "description": "This collection has all the CRUD operations to create, edit, list and delete the posts posted by the users."
+    }
+  ],
+  "paths": {
+    "/posts{id}": {
+      "put": {
+        "tags": [
+          "Posts"
+        ],
+        "summary": "Put request to update a post",
+        "description": "Use this method to update a post",
+        "operationId": "UpdatePost",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of the post",
+            "required": true,
+            "style": "simple",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "description": "id of the user",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "description": "title of post",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "body",
+            "in": "query",
+            "description": "body of post",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Posts"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Posts"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Posts"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Posts"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Posts"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Posts"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Posts"
+        ],
+        "summary": "Delete request to delete a post",
+        "description": "Use this method to delete a post",
+        "operationId": "DeletePost",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of the post",
+            "required": true,
+            "style": "simple",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "description": "id of the user",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "description": "title of post",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "body",
+            "in": "query",
+            "description": "body of post",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Posts"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Posts"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Posts"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Posts"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/posts/{user_id}": {
+      "put": {
+        "tags": [
+          "Posts"
+        ],
+        "summary": "Put request to update a specific post by user id",
+        "description": "Use this method to update a specific post by user id",
+        "operationId": "UpdatePostUserId",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "The user_id needed to update a post",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "description": "id of post",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "description": "title of post",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "body",
+            "in": "query",
+            "description": "body of post",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Posts"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Posts"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Posts"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Posts"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Posts"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Posts"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Posts"
+        ],
+        "summary": "Delete request to delete a specific post by user id",
+        "description": "Use this method to delete a specific post by user id",
+        "operationId": "DeletePostUserId",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "User id needed to delete post",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "description": "id of post",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "description": "title of post",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "body",
+            "in": "query",
+            "description": "body of post",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Posts"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Posts"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Posts"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Posts"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Posts": {
+        "required": [
+          "body",
+          "id",
+          "title",
+          "user_id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "example": 10
+          },
+          "user_id": {
+            "type": "integer",
+            "format": "int64",
+            "example": 10
+          },
+          "title": {
+            "type": "string",
+            "example": "theTitle"
+          },
+          "body": {
+            "type": "string",
+            "example": "theBody"
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "posts": {
+        "description": "An object containing Posts",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Posts"
+            }
+          },
+          "application/xml": {
+            "schema": {
+              "$ref": "#/components/schemas/Posts"
+            }
+          }
+        },
+        "required": true
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
